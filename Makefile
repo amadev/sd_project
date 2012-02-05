@@ -3,7 +3,7 @@ VE_NAME=virtualenv
 VE_DIR=$(SELF_DIR)/$(VE_NAME)
 BUILD_DIR=$(SELF_DIR)/build
 
-all: install_ve test
+all: install_ve test inspect
 
 install_ve:
 	rm -rf $(VE_DIR)
@@ -21,5 +21,5 @@ test:
 inspect:
 	rm -f build/pylint.txt
 	rm -f build/pep8.txt
+	pylint -f parseable -E $(SELF_DIR) > build/pylint.txt
 	pep8 --repeat $(SELF_DIR) | perl -ple 's/: ([WE]\d+)/: [$1]/' > build/pep8.txt
-	pylint -f parseable $(SELF_DIR) > build/pylint.txt
