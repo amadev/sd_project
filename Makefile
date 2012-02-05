@@ -21,5 +21,5 @@ test:
 inspect:
 	rm -f build/pylint.txt
 	rm -f build/pep8.txt
-	pylint -f parseable -E $(SELF_DIR) > build/pylint.txt
+	sh -c 'pylint -f parseable $(SELF_DIR) > build/pylint.txt; echo -n'
 	pep8 --repeat $(SELF_DIR) | perl -ple 's/: ([WE]\d+)/: [$1]/' > build/pep8.txt
